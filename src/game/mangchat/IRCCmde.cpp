@@ -1559,28 +1559,28 @@ void IRCCmd::Sysmsg_Server(_CDATA *CD)
 	if(_PARAMS[0] == "a")
     {
         std::string str = _PARAMS[1];
-        std::string ancmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 WoW Gollum Alert \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
-        sWorld.SendWorldText(5000,str.c_str());
+        std::string ancmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 System Alert \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
+        sWorld.SendWorldText(3000,str.c_str());
 		sIRC.Send_IRC_Channel(ircchan, ancmsg, true);
     }
     else if (_PARAMS[0] == "e")
     {
         std::string str = _PARAMS[1];
         std::string notstr = "[Server Event]: " + _PARAMS[1];
-        std::string notmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 WoW Gollum Game Event \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
+        std::string notmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 Game Event \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
         WorldPacket data(SMSG_NOTIFICATION, (notstr.size()+1));
         data << notstr;
         WorldPacket data2(SMSG_PLAY_SOUND,32);
         data2 << (uint32)1400;
         sWorld.SendGlobalMessage(&data2);
         sWorld.SendGlobalMessage(&data);
-        sWorld.SendWorldText(5000,str.c_str());
+        sWorld.SendWorldText(3000,str.c_str());
 		sIRC.Send_IRC_Channel(ircchan, notmsg, true);
     }
     else if (_PARAMS[0] == "n")
     {
         std::string str = "Global notify: " + _PARAMS[1];
-        std::string notmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 WoW Gollum Notification \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
+        std::string notmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 Notification \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
         WorldPacket data(SMSG_NOTIFICATION, (str.size()+1));
         data << str;
         sWorld.SendGlobalMessage(&data);
@@ -1590,8 +1590,8 @@ void IRCCmd::Sysmsg_Server(_CDATA *CD)
     {
         WorldDatabase.PExecute( "INSERT INTO IRC_AutoAnnounce (message, addedby) VALUES ('%s', '%s')", _PARAMS[1].c_str(), CD->USER.c_str());
         std::string str = _PARAMS[1];
-        std::string ancmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 WoW Gollum Information \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
-        sWorld.SendWorldText(5000,str.c_str());
+        std::string ancmsg = MakeMsg("\00304,08\037/!\\\037\017\00304 Information \00304,08\037/!\\\037\017 %s",_PARAMS[1].c_str());
+        sWorld.SendWorldText(3000,str.c_str());
         sIRC.Send_IRC_Channel(ircchan, ancmsg, true);
     }
     else if (_PARAMS[0] == "del")
